@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    commands:
+      - echo "Installing Maven..."
+      - apt-get update
+      - apt-get install -y maven
+  build:
+    commands:
+      - echo "Building the Java project..."
+      - mvn clean install
+  post_build:
+    commands:
+      - echo "Build completed. Running additional steps if needed."
+      # Additional commands or deployment steps can be added here
+
+artifacts:
+  files: '**/*'
+  discard-paths: yes
+  base-directory: target
